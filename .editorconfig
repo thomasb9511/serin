@@ -1,0 +1,22 @@
+
+[*.{c,c++,cc,cginc,compute,cp,cpp,cu,cuh,cxx,h,hh,hlsl,hlsli,hlslinc,hpp,hxx,inc,inl,ino,ipp,mpp,mq4,mq5,mqh,proto,tpp,usf,ush}]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[*.{appxmanifest,axaml,axml,build,config,csproj,dbml,discomap,dtd,jsproj,lsproj,njsproj,nuspec,paml,proj,props,resw,resx,StyleCop,targets,tasks,vbproj,xaml,xamlx,xml,xoml,xsd}]
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+[*]
+
+# ReSharper properties
+resharper_autodetect_indent_settings = true
+resharper_cpp_keep_user_linebreaks = false
+resharper_int_align_comments = true
+resharper_int_align_declaration_names = true
+resharper_int_align_eq = true
+resharper_keep_blank_lines_in_code = 1
+resharper_keep_blank_lines_in_declarations = 1
+resharper_use_continuous_line_indent_in_method_pars = true
