@@ -243,7 +243,7 @@ void vanity()
 
     CryptoPP::Integer x(key.c_str());
 
-    CryptoPP::Integer y("4c2b6143c494e74628498b77f4a2bfccb9152f047bdfdd864c86728a781f9768h");
+    CryptoPP::Integer y("8c2b6143c494e74628498b77f4a2bfccb9152f047bdfdd864c86728a781f9768h");
 
     x = x % y;
 
