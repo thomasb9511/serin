@@ -16,8 +16,8 @@ env:
   BUILD_PLATFORM: x64
   BUILD_CONFIGURATION: Release
 
-permissions:
-  contents: read
+#permissions:
+#  contents: read
 
 jobs:
   build:
