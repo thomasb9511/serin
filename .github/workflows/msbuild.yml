@@ -69,4 +69,4 @@ jobs:
         tag_name: ${{ steps.tag.outputs.release_tag }}
       
         # Newline-delimited list of path globs for asset files to upload
-        files: rel.zip
+        files: x64\Release\rel.zip
