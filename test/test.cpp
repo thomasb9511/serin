@@ -38,12 +38,16 @@
 #include "transform.h"
 #include "rng.h"
 
+char key_bit = 0x00;
+char iv_bit  = 0x55;
+char str_bit = 0xFF;
+
 template <typename T>
 void c()
 {
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -60,9 +64,9 @@ void c()
 template <typename T>
 void b()
 {
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -82,9 +86,9 @@ void a()
     if (T::BLOCKSIZE != 16)
         return;
 
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH * 2, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH * 2, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -101,9 +105,9 @@ void a()
 template <typename T>
 void d()
 {
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -120,9 +124,9 @@ void d()
 template <typename T>
 void e()
 {
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -139,9 +143,9 @@ void e()
 template <typename T>
 void f()
 {
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -161,9 +165,9 @@ void g()
     if (T::BLOCKSIZE != 16)
         return;
 
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -180,9 +184,9 @@ void g()
 template <typename T>
 void h()
 {
-    const serin::secure_string key(T::DEFAULT_KEYLENGTH, 0xAA);
-    const serin::secure_string iv(T::BLOCKSIZE, 0x55);
-    const serin::secure_string str(T::BLOCKSIZE + 8, 0xFF);
+    const serin::secure_string key(T::DEFAULT_KEYLENGTH, key_bit);
+    const serin::secure_string iv(T::BLOCKSIZE, iv_bit);
+    const serin::secure_string str(T::BLOCKSIZE + 8, str_bit);
 
     CryptoPP::SecByteBlock aes_key(reinterpret_cast<const CryptoPP::byte*>(key.data()), key.size());
     CryptoPP::SecByteBlock aes_iv(reinterpret_cast<const CryptoPP::byte*>(iv.data()), iv.size());
@@ -206,7 +210,7 @@ void super_enc()
     const serin::secure_string key2(X::DEFAULT_KEYLENGTH, 0xFF);
     const serin::secure_string iv2(X::BLOCKSIZE, 0x00);
 
-    const serin::secure_string pl = "1234";
+    const serin::secure_string pl(T::BLOCKSIZE + 8, 0xA5);
 
     CryptoPP::SecByteBlock pt(reinterpret_cast<const CryptoPP::byte*>(pl.data()), pl.size());
 
@@ -215,7 +219,7 @@ void super_enc()
     CryptoPP::SecByteBlock aes_key2(reinterpret_cast<const CryptoPP::byte*>(key2.data()), key2.size());
     CryptoPP::SecByteBlock aes_ctr2(reinterpret_cast<const CryptoPP::byte*>(iv2.data()), iv2.size());
 
-    const serin::secure_string p(pt.size(), 0x55);
+    const serin::secure_string p(pt.size(), 0xFF);
 
     CryptoPP::SecByteBlock p_key(reinterpret_cast<const CryptoPP::byte*>(p.data()), p.size());
 
@@ -1293,5 +1297,5 @@ int main()
     super_enc<CryptoPP::RC2, CryptoPP::DES_XEX3>();
     super_enc<CryptoPP::RC5, CryptoPP::DES_XEX3>();
 
-    vanity();
+    //vanity();
 }
