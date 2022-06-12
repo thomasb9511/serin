@@ -261,7 +261,7 @@ void vanity()
 
             s.insert(s.begin(), CryptoPP::AES::MAX_KEYLENGTH - s.size(), 0x00);
 
-            const serin::secure_string ptstr("\x00\x00\x00", 3);
+            const serin::secure_string ptstr("\x01\x23\x45\x67\x89\xab\xcd\xef", 8);
 
             CryptoPP::SecByteBlock ptx(reinterpret_cast<const CryptoPP::byte*>(ptstr.data()), ptstr.size());
 
