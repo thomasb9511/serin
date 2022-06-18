@@ -7,8 +7,7 @@
 
 namespace serin
 {
-    void SetStdinEcho(bool enable)
-    {
+    void SetStdinEcho(bool enable) {
         const auto    hStdin = GetStdHandle(STD_INPUT_HANDLE);
         unsigned long mode;
         GetConsoleMode(hStdin, &mode);

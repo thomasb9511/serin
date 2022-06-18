@@ -350,3 +350,11 @@ MigrationBackup/
 .ionide/
 
 enc.bin
+/record/XTS
+/record/OFB
+/record/GCM
+/record/EAX
+/record/CTS
+/record/CTR
+/record/CFB
+/record/CBC

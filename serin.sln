@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serin", "serin\serin.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{C981FBCF-5A22-4238-BD8D-2B3777A6AD31}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "record", "record\record.vcxproj", "{2E256F0D-85B3-461D-B42C-6423C9207401}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{C981FBCF-5A22-4238-BD8D-2B3777A6AD31}.Release|x64.Build.0 = Release|x64
 		{C981FBCF-5A22-4238-BD8D-2B3777A6AD31}.Release|x86.ActiveCfg = Release|Win32
 		{C981FBCF-5A22-4238-BD8D-2B3777A6AD31}.Release|x86.Build.0 = Release|Win32
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Debug|x64.ActiveCfg = Debug|x64
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Debug|x64.Build.0 = Debug|x64
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Debug|x86.ActiveCfg = Debug|Win32
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Debug|x86.Build.0 = Debug|Win32
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Release|x64.ActiveCfg = Release|x64
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Release|x64.Build.0 = Release|x64
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Release|x86.ActiveCfg = Release|Win32
+		{2E256F0D-85B3-461D-B42C-6423C9207401}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,9 +8,7 @@ namespace serin
 {
     namespace cipher
     {
-        namespace ies
-        {
-        }
+        namespace ies { }
 
         namespace aesgcm
         {
@@ -99,23 +97,23 @@ namespace serin
             {
                 template <typename F>
                 CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int& TAG_SIZE);
+                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE);
 
                 template <typename F>
                 CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int& TAG_SIZE);
+                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE);
             } // namespace gcm
 
             namespace eax
             {
                 template <typename F>
                 CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int& TAG_SIZE);
+                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE);
 
                 template <typename F>
                 CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int& TAG_SIZE);
+                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE);
             } // namespace eax
         }     // namespace aead
     }         // namespace cipher
-} // namespace serin
+}             // namespace serin

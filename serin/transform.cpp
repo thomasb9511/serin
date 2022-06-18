@@ -14,8 +14,7 @@ namespace serin
     {
         namespace hex
         {
-            std::string to(std::string& input)
-            {
+            std::string to(std::string& input) {
                 const CryptoPP::byte* pbData   = (CryptoPP::byte*)input.data();
                 const unsigned int    nDataLen = input.length();
 
@@ -37,8 +36,7 @@ namespace serin
                 return output;
             }
 
-            std::string to(CryptoPP::SecByteBlock& input)
-            {
+            std::string to(CryptoPP::SecByteBlock& input) {
                 std::string output;
 
                 try
@@ -57,8 +55,7 @@ namespace serin
                 return output;
             }
 
-            std::string from(std::string& input)
-            {
+            std::string from(std::string& input) {
                 const CryptoPP::byte* pbData   = (CryptoPP::byte*)input.data();
                 const unsigned int    nDataLen = input.length();
 
@@ -80,8 +77,7 @@ namespace serin
                 return output;
             }
 
-            std::string from(CryptoPP::SecByteBlock& input)
-            {
+            std::string from(CryptoPP::SecByteBlock& input) {
                 std::string output;
 
                 try
@@ -102,8 +98,7 @@ namespace serin
 
             namespace bytes
             {
-                CryptoPP::SecByteBlock to(CryptoPP::SecByteBlock& input)
-                {
+                CryptoPP::SecByteBlock to(CryptoPP::SecByteBlock& input) {
                     CryptoPP::SecByteBlock output;
 
                     try
@@ -122,8 +117,7 @@ namespace serin
                     return output;
                 }
 
-                CryptoPP::SecByteBlock from(CryptoPP::SecByteBlock& input)
-                {
+                CryptoPP::SecByteBlock from(CryptoPP::SecByteBlock& input) {
                     CryptoPP::SecByteBlock output;
 
                     try
@@ -146,8 +140,7 @@ namespace serin
 
         namespace logical
         {
-            std::string xo(std::string& value, std::string& key)
-            {
+            std::string xo(std::string& value, std::string& key) {
                 std::string             retval(value);
                 const long unsigned int klen = key.length();
                 const long unsigned int vlen = value.length();
@@ -161,8 +154,7 @@ namespace serin
                 return retval;
             }
 
-            CryptoPP::SecByteBlock interleave(CryptoPP::SecByteBlock& a, CryptoPP::SecByteBlock& b)
-            {
+            CryptoPP::SecByteBlock interleave(CryptoPP::SecByteBlock& a, CryptoPP::SecByteBlock& b) {
                 const size_t len_a = a.size();
                 const size_t len_b = b.size();
 
@@ -179,8 +171,7 @@ namespace serin
                 return interleaved;
             }
 
-            CryptoPP::SecByteBlock xo(CryptoPP::SecByteBlock& a, CryptoPP::SecByteBlock& b)
-            {
+            CryptoPP::SecByteBlock xo(CryptoPP::SecByteBlock& a, CryptoPP::SecByteBlock& b) {
                 CryptoPP::SecByteBlock key = a;
 
                 for (size_t i = 0; i < key.size(); i++)
@@ -189,8 +180,7 @@ namespace serin
                 return key;
             }
 
-            void rotate_(CryptoPP::SecByteBlock& in, unsigned int n)
-            {
+            void rotate_(CryptoPP::SecByteBlock& in, unsigned int n) {
                 for (size_t i = 0; i < in.size(); ++i)
                 {
                     n = (~n * (i + n) + 1) % 8;

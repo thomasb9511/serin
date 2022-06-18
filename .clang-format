@@ -13,7 +13,7 @@ BraceWrapping:
   AfterClass: true
   AfterControlStatement: true
   AfterEnum: true
-  AfterFunction: true
+  AfterFunction: false
   AfterNamespace: true
   AfterStruct: true
   AfterUnion: true
@@ -22,9 +22,10 @@ BraceWrapping:
   BeforeElse: true
   BeforeLambdaBody: true
   BeforeWhile: true
-  SplitEmptyFunction: true
-  SplitEmptyRecord: true
-  SplitEmptyNamespace: true
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
 BreakBeforeBraces: Custom
 BreakConstructorInitializers: AfterColon
 ColumnLimit: 120
@@ -33,17 +34,14 @@ DerivePointerAlignment: true
 FixNamespaceComments: true
 IncludeBlocks: Regroup
 IncludeCategories: 
-  - Regex: '^<.*'
+  - Regex: ^<.*
     Priority: 1
-  - Regex: '^".*'
+  - Regex: ^".*
     Priority: 2
-  - Regex: '.*'
+  - Regex: .*
     Priority: 3
-IncludeIsMainRegex: '([-_](test|unittest))?$'
-IndentCaseBlocks: true
+IncludeIsMainRegex: ([-_](test|unittest))?$
 KeepEmptyLinesAtTheStartOfBlocks: false
-MacroBlockBegin: ''
-MacroBlockEnd: ''
 NamespaceIndentation: All
 SortIncludes: false
 SpaceBeforeCtorInitializerColon: false

@@ -50,8 +50,7 @@ namespace serin
         namespace aesgcm
         {
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& iv)
-            {
+                                           CryptoPP::SecByteBlock& iv) {
                 const int TAG_SIZE = 16;
 
                 // Encrypted, with Tag
@@ -93,8 +92,7 @@ namespace serin
             }
 
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& iv)
-            {
+                                           CryptoPP::SecByteBlock& iv) {
                 const int TAG_SIZE = 16;
 
                 // Recovered plaintext
@@ -149,8 +147,7 @@ namespace serin
         {
             template <typename T>
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -185,8 +182,7 @@ namespace serin
 
             template <typename T>
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -224,8 +220,7 @@ namespace serin
         {
             template <typename T>
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -260,8 +255,7 @@ namespace serin
 
             template <typename T>
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -299,8 +293,7 @@ namespace serin
         {
             template <typename T>
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -335,8 +328,7 @@ namespace serin
 
             template <typename T>
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -374,8 +366,7 @@ namespace serin
         {
             template <typename T>
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -410,8 +401,7 @@ namespace serin
 
             template <typename T>
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -448,8 +438,7 @@ namespace serin
         {
             template <typename T>
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -484,8 +473,7 @@ namespace serin
 
             template <typename T>
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -523,8 +511,7 @@ namespace serin
         {
             template <typename T>
             CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -559,8 +546,7 @@ namespace serin
 
             template <typename T>
             CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr)
-            {
+                                           CryptoPP::SecByteBlock& ctr) {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -600,8 +586,7 @@ namespace serin
             {
                 template <typename F>
                 CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE)
-                {
+                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE) {
                     CryptoPP::SecByteBlock ciphertext;
                     try
                     {
@@ -659,8 +644,7 @@ namespace serin
 
                 template <typename F>
                 CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE)
-                {
+                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE) {
                     CryptoPP::SecByteBlock plaintext;
                     try
                     {
@@ -730,8 +714,7 @@ namespace serin
             {
                 template <typename F>
                 CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE)
-                {
+                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE) {
                     CryptoPP::SecByteBlock ciphertext;
                     try
                     {
@@ -789,8 +772,7 @@ namespace serin
 
                 template <typename F>
                 CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE)
-                {
+                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE) {
                     CryptoPP::SecByteBlock plaintext;
                     try
                     {
