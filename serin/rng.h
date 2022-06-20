@@ -21,19 +21,17 @@ namespace serin
             CombinedRNG(RandomNumberGenerator& rng1, RandomNumberGenerator& rng2):
                 m_rng1(rng1), m_rng2(rng2) { }
 
-            bool CanIncorporateEntropy() const override {
+            auto CanIncorporateEntropy() const -> bool override {
                 return m_rng1.CanIncorporateEntropy() || m_rng2.CanIncorporateEntropy();
             }
 
             void IncorporateEntropy(const CryptoPP::byte* input, size_t length) override {
-                if (m_rng1.CanIncorporateEntropy())
-                    m_rng1.IncorporateEntropy(input, length);
-                if (m_rng2.CanIncorporateEntropy())
-                    m_rng2.IncorporateEntropy(input, length);
+                if (m_rng1.CanIncorporateEntropy()) { m_rng1.IncorporateEntropy(input, length); }
+                if (m_rng2.CanIncorporateEntropy()) { m_rng2.IncorporateEntropy(input, length); }
             }
 
             void GenerateBlock(CryptoPP::byte* output, size_t size) override {
-                CryptoPP::RandomNumberSource(m_rng1, size, true, new CryptoPP::ArraySink(output, size));
+                CryptoPP::RandomNumberSource give_me_a_name(m_rng1, size, true, new CryptoPP::ArraySink(output, size));
                 CryptoPP::RandomNumberSource(m_rng2, size, true, new CryptoPP::ArrayXorSink(output, size));
             }
 
@@ -41,46 +39,46 @@ namespace serin
             RandomNumberGenerator& m_rng1,& m_rng2;
         };
 
-        sympack                rand_sympack();
-        CryptoPP::SecByteBlock randblock(int bytes);
+        auto rand_sympack() -> sympack;
+        auto randblock(int bytes) -> CryptoPP::SecByteBlock;
 
-        std::string randstrng(int len);
-        std::string rdprime(unsigned int bytes);
+        auto randstrng(int len) -> std::string;
+        auto rdprime(unsigned int bytes) -> std::string;
 
         namespace RDSEED
         {
-            sympack                rand_sympack();
-            CryptoPP::SecByteBlock randblock(int bytes);
+            auto rand_sympack() -> sympack;
+            auto randblock(int bytes) -> CryptoPP::SecByteBlock;
 
-            std::string randstrng(int len);
-            std::string rdprime(unsigned int bytes);
+            auto randstrng(int len) -> std::string;
+            auto rdprime(unsigned int bytes) -> std::string;
         } // namespace RDSEED
 
         namespace RDRAND
         {
-            sympack                rand_sympack();
-            CryptoPP::SecByteBlock randblock(int bytes);
+            auto rand_sympack() -> sympack;
+            auto randblock(int bytes) -> CryptoPP::SecByteBlock;
 
-            std::string randstrng(int len);
-            std::string rdprime(unsigned int bytes);
+            auto randstrng(int len) -> std::string;
+            auto rdprime(unsigned int bytes) -> std::string;
         } // namespace RDRAND
 
         namespace X917
         {
-            sympack                rand_sympack();
-            CryptoPP::SecByteBlock randblock(int bytes);
+            auto rand_sympack() -> sympack;
+            auto randblock(int bytes) -> CryptoPP::SecByteBlock;
 
-            std::string randstrng(int len);
-            std::string rdprime(unsigned int bytes);
+            auto randstrng(int len) -> std::string;
+            auto rdprime(unsigned int bytes) -> std::string;
         } // namespace X917
 
         namespace X931
         {
-            sympack                rand_sympack();
-            CryptoPP::SecByteBlock randblock(int bytes);
+            auto rand_sympack() -> sympack;
+            auto randblock(int bytes) -> CryptoPP::SecByteBlock;
 
-            std::string randstrng(int len);
-            std::string rdprime(unsigned int bytes);
+            auto randstrng(int len) -> std::string;
+            auto rdprime(unsigned int bytes) -> std::string;
         } // namespace X931
     }     // namespace rng
 }         // namespace serin

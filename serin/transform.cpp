@@ -174,8 +174,7 @@ namespace serin
             CryptoPP::SecByteBlock xo(CryptoPP::SecByteBlock& a, CryptoPP::SecByteBlock& b) {
                 CryptoPP::SecByteBlock key = a;
 
-                for (size_t i = 0; i < key.size(); i++)
-                    key[i]    = a[i] ^ b[i];
+                for (size_t i = 0; i < key.size(); i++) { key[i] = a[i] ^ b[i]; }
 
                 return key;
             }
@@ -183,7 +182,7 @@ namespace serin
             void rotate_(CryptoPP::SecByteBlock& in, unsigned int n) {
                 for (size_t i = 0; i < in.size(); ++i)
                 {
-                    n = (~n * (i + n) + 1) % 8;
+                    n = ((i + n) * ~n + 1) % 8;
 
                     in[i] = in[i] << n | in[i] >> 8 - n;
                 }

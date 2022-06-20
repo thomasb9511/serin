@@ -13,50 +13,111 @@ namespace serin
     namespace hash
     {
         template <typename F>
-        std::string hmac(std::string& input, CryptoPP::SecByteBlock& key) {
-            std::string mac, encoded;
-
-            CryptoPP::HMAC<F> hmac(key, key.size());
-
-            CryptoPP::StringSource ss2(input, true,
-                                       new CryptoPP::HashFilter(hmac, new CryptoPP::StringSink(mac)) // HashFilter
-                );                                                                                   // StringSource
-
-            encoded.clear();
-
-            return mac;
-        }
-
-        template <typename F>
-        std::string hash(std::string& input) {
-            auto           pbData   = reinterpret_cast<const CryptoPP::byte*>(input.data());
-            size_t         nDataLen = input.length();
-            CryptoPP::byte abDigest[F::DIGESTSIZE];
-
-            F().CalculateDigest(abDigest, pbData, nDataLen);
-
-            return std::string(static_cast<char*>(abDigest), F::DIGESTSIZE);
-        }
-
-        template <typename F>
-        CryptoPP::SecByteBlock hash(CryptoPP::SecByteBlock& input) {
+        std::string hash(const std::string& input) {
             CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
 
-            F().CalculateDigest(abDigest, input, input.size());
+            try
+            {
+                F hash;
+
+                CryptoPP::StringSource f((input), true,
+                                         new CryptoPP::HashFilter(
+                                             hash, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+            }
+            catch (CryptoPP::InvalidArgument& e)
+            {
+                std::cerr << "Caught InvalidArgument..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            } catch (CryptoPP::Exception& e)
+            {
+                std::cerr << "Caught Exception..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            }
+
+            return std::string(reinterpret_cast<char*>(abDigest.data()), F::DIGESTSIZE);
+        }
+
+        template <typename F>
+        std::string hmac(const std::string& input, const CryptoPP::SecByteBlock& key) {
+            CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
+
+            try
+            {
+                CryptoPP::HMAC<F> hmac(key, key.size());
+
+                CryptoPP::StringSource f((input), true,
+                                         new CryptoPP::HashFilter(
+                                             hmac, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+            }
+            catch (CryptoPP::InvalidArgument& e)
+            {
+                std::cerr << "Caught InvalidArgument..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            } catch (CryptoPP::Exception& e)
+            {
+                std::cerr << "Caught Exception..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            }
+
+            return std::string(reinterpret_cast<char*>(abDigest.data()), F::DIGESTSIZE);
+        }
+
+        template <typename F>
+        CryptoPP::SecByteBlock hash(const CryptoPP::SecByteBlock& input) {
+            CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
+
+            try
+            {
+                F hash;
+
+                CryptoPP::ArraySource f((input.data(), input.size()), true,
+                                        new CryptoPP::HashFilter(
+                                            hash, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+            }
+            catch (CryptoPP::InvalidArgument& e)
+            {
+                std::cerr << "Caught InvalidArgument..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            } catch (CryptoPP::Exception& e)
+            {
+                std::cerr << "Caught Exception..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            }
 
             return abDigest;
         }
 
         template <typename F>
-        CryptoPP::SecByteBlock hmac(CryptoPP::SecByteBlock& input, CryptoPP::SecByteBlock& key) {
-            CryptoPP::HMAC<F> hmac(key, key.size());
-            hmac.Update(input, input.size());
+        CryptoPP::SecByteBlock hmac(const CryptoPP::SecByteBlock& input, const CryptoPP::SecByteBlock& key) {
+            CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
 
-            CryptoPP::SecByteBlock d(CryptoPP::HMAC<F>::DIGESTSIZE);
+            try
+            {
+                CryptoPP::HMAC<F> hmac(key, key.size());
 
-            hmac.Final(d);
+                CryptoPP::ArraySource f((input.data(), input.size()), true,
+                                        new CryptoPP::HashFilter(
+                                            hmac, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+            }
+            catch (CryptoPP::InvalidArgument& e)
+            {
+                std::cerr << "Caught InvalidArgument..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            } catch (CryptoPP::Exception& e)
+            {
+                std::cerr << "Caught Exception..." << std::endl;
+                std::cerr << e.what() << std::endl;
+                std::cerr << std::endl;
+            }
 
-            return d;
+            return abDigest;
         }
 
         template <typename F>
@@ -78,53 +139,112 @@ namespace serin
         namespace files
         {
             template <typename F>
-            std::string hmac(std::string& filename, CryptoPP::SecByteBlock& key) {
-                std::string mac, encoded;
-
-                CryptoPP::HMAC<F> hmac(key, key.size());
-
-                CryptoPP::StringSource ss2(filename, true,
-                                           new CryptoPP::HashFilter(hmac, new CryptoPP::StringSink(mac)) // HashFilter
-                    );                                                                                   // StringSource
-
-                encoded.clear();
-
-                return mac;
-            }
-
-            template <typename F>
-            std::string hash(std::string& filename) {
-                CryptoPP::byte abDigest[F::DIGESTSIZE];
-
-                F hash;
-
-                CryptoPP::FileSource f((filename.c_str()), true,
-                                       new CryptoPP::HashFilter(
-                                           hash, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
-
-                return std::string(reinterpret_cast<char*>(abDigest), F::DIGESTSIZE);
-            }
-
-            template <typename F>
-            CryptoPP::SecByteBlock hash(CryptoPP::SecByteBlock& filename) {
+            std::string hash(const std::string& filename) {
                 CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
 
-                F().CalculateDigest(abDigest, filename, filename.size());
+                try
+                {
+                    F hash;
+
+                    CryptoPP::FileSource f((filename.c_str()), true,
+                                           new CryptoPP::HashFilter(
+                                               hash, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+                }
+                catch (CryptoPP::InvalidArgument& e)
+                {
+                    std::cerr << "Caught InvalidArgument..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                } catch (CryptoPP::Exception& e)
+                {
+                    std::cerr << "Caught Exception..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                }
+
+                return std::string(reinterpret_cast<char*>(abDigest.data()), F::DIGESTSIZE);
+            }
+
+            template <typename F>
+            std::string hmac(const std::string& filename, const CryptoPP::SecByteBlock& key) {
+                CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
+
+                try
+                {
+                    CryptoPP::HMAC<F> hmac(key, key.size());
+
+                    CryptoPP::FileSource f((filename.c_str()), true,
+                                           new CryptoPP::HashFilter(
+                                               hmac, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+                }
+                catch (CryptoPP::InvalidArgument& e)
+                {
+                    std::cerr << "Caught InvalidArgument..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                } catch (CryptoPP::Exception& e)
+                {
+                    std::cerr << "Caught Exception..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                }
+
+                return std::string(reinterpret_cast<char*>(abDigest.data()), F::DIGESTSIZE);
+            }
+
+            template <typename F>
+            CryptoPP::SecByteBlock hash_bytes(const std::string& filename) {
+                CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
+
+                try
+                {
+                    F hash;
+
+                    CryptoPP::FileSource f((filename.c_str()), true,
+                                           new CryptoPP::HashFilter(
+                                               hash, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+                }
+                catch (CryptoPP::InvalidArgument& e)
+                {
+                    std::cerr << "Caught InvalidArgument..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                } catch (CryptoPP::Exception& e)
+                {
+                    std::cerr << "Caught Exception..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                }
 
                 return abDigest;
             }
 
             template <typename F>
-            CryptoPP::SecByteBlock hmac(CryptoPP::SecByteBlock& filename, CryptoPP::SecByteBlock& key) {
-                CryptoPP::HMAC<F> hmac(key, key.size());
-                hmac.Update(filename, filename.size());
+            CryptoPP::SecByteBlock hmac_bytes(const std::string& filename, const CryptoPP::SecByteBlock& key) {
+                CryptoPP::SecByteBlock abDigest(F::DIGESTSIZE);
 
-                CryptoPP::SecByteBlock d(CryptoPP::HMAC<F>::DIGESTSIZE);
+                try
+                {
+                    CryptoPP::HMAC<F> hmac(key, key.size());
 
-                hmac.Final(d);
+                    CryptoPP::FileSource f((filename.c_str()), true,
+                                           new CryptoPP::HashFilter(
+                                               hmac, new CryptoPP::ArraySink(abDigest, F::DIGESTSIZE)));
+                }
+                catch (CryptoPP::InvalidArgument& e)
+                {
+                    std::cerr << "Caught InvalidArgument..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                } catch (CryptoPP::Exception& e)
+                {
+                    std::cerr << "Caught Exception..." << std::endl;
+                    std::cerr << e.what() << std::endl;
+                    std::cerr << std::endl;
+                }
 
-                return d;
+                return abDigest;
             }
-        } // namespace files
-    }     // namespace hash
-}         // namespace serin
+        }
+    }
+}

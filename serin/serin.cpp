@@ -9,13 +9,10 @@ namespace serin
 {
     void SetStdinEcho(bool enable) {
         const auto    hStdin = GetStdHandle(STD_INPUT_HANDLE);
-        unsigned long mode;
+        unsigned long mode   = 0;
         GetConsoleMode(hStdin, &mode);
 
-        if (enable)
-            mode |= ENABLE_ECHO_INPUT;
-        else
-            mode &= ~ENABLE_ECHO_INPUT;
+        enable ? mode |= ENABLE_ECHO_INPUT : mode &= ~ENABLE_ECHO_INPUT;
 
         SetConsoleMode(hStdin, mode);
     }

@@ -49,8 +49,8 @@ namespace serin
 
         namespace aesgcm
         {
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& iv) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& iv) -> CryptoPP::SecByteBlock {
                 const int TAG_SIZE = 16;
 
                 // Encrypted, with Tag
@@ -62,7 +62,8 @@ namespace serin
                     e.SetKeyWithIV(key, key.size(), iv, iv.size());
                     // e.SpecifyDataLengths( 0, pdata.size(), 0 );
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -91,8 +92,8 @@ namespace serin
                 return ciphertext;
             }
 
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& iv) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& iv) -> CryptoPP::SecByteBlock {
                 const int TAG_SIZE = 16;
 
                 // Recovered plaintext
@@ -103,7 +104,8 @@ namespace serin
                     CryptoPP::GCM<CryptoPP::AES>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), iv, iv.size());
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -146,8 +148,8 @@ namespace serin
         namespace ctr
         {
             template <typename T>
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -156,7 +158,8 @@ namespace serin
                     typename CryptoPP::CTR_Mode<T>::Encryption e;
                     e.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -181,8 +184,8 @@ namespace serin
             }
 
             template <typename T>
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -191,7 +194,8 @@ namespace serin
                     typename CryptoPP::CTR_Mode<T>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -219,8 +223,8 @@ namespace serin
         namespace cbc
         {
             template <typename T>
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -229,7 +233,8 @@ namespace serin
                     typename CryptoPP::CBC_Mode<T>::Encryption e;
                     e.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -254,8 +259,8 @@ namespace serin
             }
 
             template <typename T>
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -264,7 +269,8 @@ namespace serin
                     typename CryptoPP::CBC_Mode<T>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -292,8 +298,8 @@ namespace serin
         namespace xts
         {
             template <typename T>
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -302,7 +308,8 @@ namespace serin
                     typename CryptoPP::XTS_Mode<T>::Encryption e;
                     e.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -327,8 +334,8 @@ namespace serin
             }
 
             template <typename T>
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -337,7 +344,8 @@ namespace serin
                     typename CryptoPP::XTS_Mode<T>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -365,8 +373,8 @@ namespace serin
         namespace cfb
         {
             template <typename T>
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -375,7 +383,8 @@ namespace serin
                     typename CryptoPP::CFB_Mode<T>::Encryption e;
                     e.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -400,8 +409,8 @@ namespace serin
             }
 
             template <typename T>
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -410,7 +419,8 @@ namespace serin
                     typename CryptoPP::CFB_Mode<T>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -437,8 +447,8 @@ namespace serin
         namespace ofb
         {
             template <typename T>
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -447,7 +457,8 @@ namespace serin
                     typename CryptoPP::OFB_Mode<T>::Encryption e;
                     e.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -472,8 +483,8 @@ namespace serin
             }
 
             template <typename T>
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -482,7 +493,8 @@ namespace serin
                     typename CryptoPP::OFB_Mode<T>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -510,8 +522,8 @@ namespace serin
         namespace cts
         {
             template <typename T>
-            CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Ciphertext
                 CryptoPP::SecByteBlock ciphertext;
 
@@ -520,7 +532,8 @@ namespace serin
                     typename CryptoPP::CBC_CTS_Mode<T>::Encryption e;
                     e.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     plain.Put(plaintext, plaintext.size());
 
@@ -545,8 +558,8 @@ namespace serin
             }
 
             template <typename T>
-            CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                           CryptoPP::SecByteBlock& ctr) {
+            auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                         CryptoPP::SecByteBlock& ctr) -> CryptoPP::SecByteBlock {
                 // Recovered plaintext
                 CryptoPP::SecByteBlock plaintext;
 
@@ -555,7 +568,8 @@ namespace serin
                     typename CryptoPP::CBC_CTS_Mode<T>::Decryption d;
                     d.SetKeyWithIV(key, key.size(), ctr);
 
-                    CryptoPP::ByteQueue plain, cipherq;
+                    CryptoPP::ByteQueue plain;
+                    CryptoPP::ByteQueue cipherq;
 
                     cipherq.Put(ciphertext, ciphertext.size());
 
@@ -585,8 +599,8 @@ namespace serin
             namespace gcm
             {
                 template <typename F>
-                CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE) {
+                auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key, CryptoPP::SecByteBlock& iv,
+                             const int&              TAG_SIZE) -> CryptoPP::SecByteBlock {
                     CryptoPP::SecByteBlock ciphertext;
                     try
                     {
@@ -643,8 +657,8 @@ namespace serin
                 }
 
                 template <typename F>
-                CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE) {
+                auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                             CryptoPP::SecByteBlock& iv, const int& TAG_SIZE) -> CryptoPP::SecByteBlock {
                     CryptoPP::SecByteBlock plaintext;
                     try
                     {
@@ -713,8 +727,8 @@ namespace serin
             namespace eax
             {
                 template <typename F>
-                CryptoPP::SecByteBlock encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                     TAG_SIZE) {
+                auto encrypt(CryptoPP::SecByteBlock& plaintext, CryptoPP::SecByteBlock& key, CryptoPP::SecByteBlock& iv,
+                             const int&              TAG_SIZE) -> CryptoPP::SecByteBlock {
                     CryptoPP::SecByteBlock ciphertext;
                     try
                     {
@@ -771,8 +785,8 @@ namespace serin
                 }
 
                 template <typename F>
-                CryptoPP::SecByteBlock decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
-                                               CryptoPP::SecByteBlock& iv, const int&                      TAG_SIZE) {
+                auto decrypt(CryptoPP::SecByteBlock& ciphertext, CryptoPP::SecByteBlock& key,
+                             CryptoPP::SecByteBlock& iv, const int& TAG_SIZE) -> CryptoPP::SecByteBlock {
                     CryptoPP::SecByteBlock plaintext;
                     try
                     {

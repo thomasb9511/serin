@@ -358,3 +358,4 @@ enc.bin
 /record/CTR
 /record/CFB
 /record/CBC
+/record/cipher_samples.BLAKE2b

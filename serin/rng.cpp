@@ -21,8 +21,9 @@ namespace serin
 {
     namespace rng
     {
-        CryptoPP::SecByteBlock randblock(const int bytes) {
-            CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH), seed(CryptoPP::AES::BLOCKSIZE);
+        auto randblock(const int bytes) -> CryptoPP::SecByteBlock {
+            CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH);
+            CryptoPP::SecByteBlock seed(CryptoPP::AES::BLOCKSIZE);
             OS_GenerateRandomBlock(false, key, key.size());
             OS_GenerateRandomBlock(false, seed, seed.size());
             CryptoPP::X917RNG xAES(new CryptoPP::AES::Encryption(key, CryptoPP::AES::MAX_KEYLENGTH), seed, NULLPTR);
@@ -46,8 +47,9 @@ namespace serin
             return randomBytes;
         }
 
-        std::string randstrng(const int len) {
-            CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH), seed(CryptoPP::AES::BLOCKSIZE);
+        auto randstrng(const int len) -> std::string {
+            CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH);
+            CryptoPP::SecByteBlock seed(CryptoPP::AES::BLOCKSIZE);
             OS_GenerateRandomBlock(false, key, key.size());
             OS_GenerateRandomBlock(false, seed, seed.size());
             CryptoPP::X917RNG xAES(new CryptoPP::AES::Encryption(key, CryptoPP::AES::MAX_KEYLENGTH), seed, NULLPTR);
@@ -73,10 +75,11 @@ namespace serin
             return randomBytes;
         }
 
-        std::string rdprime(unsigned int bytes) {
+        auto rdprime(unsigned int bytes) -> std::string {
             int size8 = bytes * 8;
 
-            CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH), seed(CryptoPP::AES::BLOCKSIZE);
+            CryptoPP::SecByteBlock key(CryptoPP::AES::MAX_KEYLENGTH);
+            CryptoPP::SecByteBlock seed(CryptoPP::AES::BLOCKSIZE);
             OS_GenerateRandomBlock(false, key, key.size());
             OS_GenerateRandomBlock(false, seed, seed.size());
             CryptoPP::X917RNG xAES(new CryptoPP::AES::Encryption(key, CryptoPP::AES::MAX_KEYLENGTH), seed, NULLPTR);
@@ -117,7 +120,7 @@ namespace serin
             return str;
         }
 
-        sympack rand_sympack() {
+        auto rand_sympack() -> sympack {
             const CryptoPP::SecByteBlock key = randblock(CryptoPP::AES::DEFAULT_KEYLENGTH);
             const CryptoPP::SecByteBlock iv  = randblock(CryptoPP::AES::BLOCKSIZE);
 
@@ -128,7 +131,7 @@ namespace serin
 
         namespace RDRAND
         {
-            CryptoPP::SecByteBlock randblock(const int bytes) {
+            auto randblock(const int bytes) -> CryptoPP::SecByteBlock {
                 CryptoPP::RDRAND prng;
 
                 CryptoPP::SecByteBlock randomBytes(bytes);
@@ -138,7 +141,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string randstrng(const int len) {
+            auto randstrng(const int len) -> std::string {
                 CryptoPP::RDRAND prng;
 
                 CryptoPP::SecByteBlock Bytes(len);
@@ -150,7 +153,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string rdprime(unsigned int bytes) {
+            auto rdprime(unsigned int bytes) -> std::string {
                 const int size8 = bytes * 8;
 
                 CryptoPP::RDRAND prng;
@@ -179,7 +182,7 @@ namespace serin
                 return str;
             }
 
-            sympack rand_sympack() {
+            auto rand_sympack() -> sympack {
                 const CryptoPP::SecByteBlock key = randblock(CryptoPP::AES::MAX_KEYLENGTH);
                 const CryptoPP::SecByteBlock iv  = randblock(CryptoPP::AES::BLOCKSIZE);
 
@@ -189,7 +192,7 @@ namespace serin
 
         namespace RDSEED
         {
-            CryptoPP::SecByteBlock randblock(const int bytes) {
+            auto randblock(const int bytes) -> CryptoPP::SecByteBlock {
                 CryptoPP::RDSEED prng;
 
                 CryptoPP::SecByteBlock randomBytes(bytes);
@@ -199,7 +202,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string randstrng(const int len) {
+            auto randstrng(const int len) -> std::string {
                 CryptoPP::RDSEED prng;
 
                 CryptoPP::SecByteBlock Bytes(len);
@@ -211,7 +214,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string rdprime(unsigned int bytes) {
+            auto rdprime(unsigned int bytes) -> std::string {
                 const int size8 = bytes * 8;
 
                 CryptoPP::RDSEED prng;
@@ -240,7 +243,7 @@ namespace serin
                 return str;
             }
 
-            sympack rand_sympack() {
+            auto rand_sympack() -> sympack {
                 const CryptoPP::SecByteBlock key = randblock(CryptoPP::AES::MAX_KEYLENGTH);
                 const CryptoPP::SecByteBlock iv  = randblock(CryptoPP::AES::BLOCKSIZE);
 
@@ -250,7 +253,7 @@ namespace serin
 
         namespace X931
         {
-            CryptoPP::SecByteBlock randblock(const int bytes) {
+            auto randblock(const int bytes) -> CryptoPP::SecByteBlock {
                 CryptoPP::AutoSeededX917RNG<CryptoPP::AES> prng;
 
                 CryptoPP::SecByteBlock randomBytes(bytes);
@@ -260,7 +263,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string randstrng(const int len) {
+            auto randstrng(const int len) -> std::string {
                 CryptoPP::AutoSeededX917RNG<CryptoPP::AES> prng;
 
                 CryptoPP::SecByteBlock Bytes(len);
@@ -272,7 +275,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string rdprime(unsigned int bytes) {
+            auto rdprime(unsigned int bytes) -> std::string {
                 int size8 = bytes * 8;
 
                 CryptoPP::AutoSeededX917RNG<CryptoPP::AES> prng;
@@ -301,7 +304,7 @@ namespace serin
                 return str;
             }
 
-            sympack rand_sympack() {
+            auto rand_sympack() -> sympack {
                 const CryptoPP::SecByteBlock key = randblock(CryptoPP::AES::MAX_KEYLENGTH);
                 const CryptoPP::SecByteBlock iv  = randblock(CryptoPP::AES::BLOCKSIZE);
 
@@ -311,7 +314,7 @@ namespace serin
 
         namespace X917
         {
-            CryptoPP::SecByteBlock randblock(const int bytes) {
+            auto randblock(const int bytes) -> CryptoPP::SecByteBlock {
                 CryptoPP::AutoSeededX917RNG<CryptoPP::DES_EDE3> prng;
 
                 CryptoPP::SecByteBlock randomBytes(bytes);
@@ -321,7 +324,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string randstrng(const int len) {
+            auto randstrng(const int len) -> std::string {
                 CryptoPP::AutoSeededX917RNG<CryptoPP::DES_EDE3> prng;
 
                 CryptoPP::SecByteBlock Bytes(len);
@@ -333,7 +336,7 @@ namespace serin
                 return randomBytes;
             }
 
-            std::string rdprime(unsigned int bytes) {
+            auto rdprime(unsigned int bytes) -> std::string {
                 int size8 = bytes * 8;
 
                 CryptoPP::AutoSeededX917RNG<CryptoPP::DES_EDE3> prng;
@@ -362,7 +365,7 @@ namespace serin
                 return str;
             }
 
-            sympack rand_sympack() {
+            auto rand_sympack() -> sympack {
                 const CryptoPP::SecByteBlock key = randblock(CryptoPP::AES::MAX_KEYLENGTH);
                 const CryptoPP::SecByteBlock iv  = randblock(CryptoPP::AES::BLOCKSIZE);
 
